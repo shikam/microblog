@@ -1,40 +1,21 @@
-pipeline {
-    agent any
-    environment {
-        CI = 'true'
-    }
+pipeline { 
+    agent { dockerfile true }
     stages {
-        stage('Build') {
+        stage('Build') { 
             steps {
-		cd /home/shai/Documents/backery/ex4/microblog 
-		
-		docker.build("microblog-image")
-		docker.image("microblog-image").withRun('-p 8000:5000', '--name microblog-con -d')
+	      script {
+	       docker.build("microblog-image")
+	       docker.image("microblog-image").withRun('-p 8000:5000', '--name microblog-con -d')
+                  }
             }
+	}
+                        }
+        post {
+            success {
+                echo "Pipeline successful"
         }
-        stage("Deploy to master"){
-          when {
-           branch 'master'
-         }
-         steps { 
-            println 'Deploying to master'
-          }
-        }
-        stage("Deploy to Production"){
-          when {
-           branch 'production'
-         }
-         steps { 
-            println 'Deploying to production'
-          }
-        }
-        stage("Deploy to development"){
-          when {
-            branch 'development'
-          }
-          steps {
-            println 'Deploying to development'
-          }
-        }
-    }
-}
+	    failure {
+		 echo "The Pipeline failed :("
+		    }
+	}
+	 }
