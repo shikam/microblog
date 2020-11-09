@@ -8,7 +8,6 @@ pipeline {
             steps {
                 println 'Compiling the application...'
 		docker build -t microblog:latest .
-		sudo docker run --name microblog -d -p 8001:5000 --rm microblog:latest
             }
         }
         stage("Deploy to master"){
