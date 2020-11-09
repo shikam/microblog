@@ -6,7 +6,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-		 docker build -t microblog:latest .
+		cd /home/shai/Documents/backery/ex4/microblog 
+		docker build -t microblog:latest .
             }
         }
         stage("Deploy to master"){
