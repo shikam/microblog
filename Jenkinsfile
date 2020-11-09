@@ -7,7 +7,9 @@ pipeline {
         stage('Build') {
             steps {
 		cd /home/shai/Documents/backery/ex4/microblog 
-		docker build -t microblog:latest .
+		
+		docker.build("microblog-image")
+		docker.image("microblog-image").withRun('-p 8000:5000', '--name microblog-con -d')
             }
         }
         stage("Deploy to master"){
