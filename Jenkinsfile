@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                println 'Compiling the application...'
+		 docker build -t microblog:latest .
             }
         }
         stage("Deploy to master"){
