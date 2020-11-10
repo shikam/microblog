@@ -6,7 +6,7 @@ pipeline {
             steps {
 			echo 'Start build'
                 	sh 'docker build -t microblog:latest .'
-			sh 'docker run --name microblog -d -p 8001:5000 --rm microblog:latest'
+			sh 'docker run --name microblogFromJenkins -d -p 8001:5000 --rm microblog:latest'
 			  
             }
 	}
